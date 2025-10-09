@@ -5,15 +5,15 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.entity.Player;
+import org.bukkit.Location;
 import org.bukkit.Bukkit;
 
 import dev.matkeg.tpask.Managers.LanguageManager;
 import dev.matkeg.tpask.Utils.*;
 import dev.matkeg.tpask.TPAsk;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-import org.bukkit.Location;
+import java.util.Map;
 
 /* --------------------------- MAIN --------------------------- */
 public class StateManager {

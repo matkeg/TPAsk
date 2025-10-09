@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.Registry;
 import org.bukkit.Location;
 
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;

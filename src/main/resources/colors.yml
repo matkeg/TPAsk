@@ -1,6 +1,11 @@
 # Colors of each message found in language packs can be changed here.
-# Learn more at https://minecraft.fandom.com/wiki/Formatting_codes
-
+#
+# NOTE: Any message entries which don't have their own entry in
+# this file will have the base color applied to them.
+#
+# Learn more about minecraft's color codes at the link below:
+# https://minecraft.fandom.com/wiki/Formatting_codes
+#
 # --------------- CHAT MESSAGE COLOR SETTINGS ---------------- 
 
 messages:

@@ -1,3 +1,12 @@
+# Translation strings representing the English (US) language.
+# 
+# You can freely modify this file. Any changes you make
+# will take effect the next time the server restarts.
+#
+# DON'T delete this file, as it servers as the default and
+# fallback language for the plugin. Any attempts to delete it
+# will result in the file being restored when the server restarts.
+#
 # --------------------- CHAT FEEDBACK MESSAGES --------------------- #
 
 messages:
