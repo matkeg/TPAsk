@@ -1,0 +1,81 @@
+# --------------------- CHAT FEEDBACK MESSAGES --------------------- #
+
+messages:
+  request_sent: "Sent a TPA request to %receiver%."
+  request_received: "%requester% sent you a TPA request!"
+
+  request_expired_receiver: "%requester%'s TPA request has expired."
+  request_expired_requester: "Your TPA request towards %receiver% has expired."
+
+  request_accepted_receiver: "You've accepted %requester%'s TPA request."
+  request_accepted_requester: "Teleporting you to %receiver%!"
+
+  request_denied_receiver: "You've denied %requester%'s TPA request."
+  request_denied_requester: "Your TPA request towards %receiver% has been denied!"
+
+  request_canceled_receiver: "%requester% canceled their TPA request."
+  request_canceled_requester: "You've canceled your TPA request towards %receiver%."
+
+  request_error_moved_receiver: "%requester% moved while teleporting and was not teleported to you."
+  request_error_moved_requester: "You were not teleported because you moved while teleporting!"
+
+  request_error_general_receiver: "You cannot be teleported to right now. Try again later."
+  request_error_general_requester: "You cannot be teleported at the moment. Try again later."
+
+  request_error_disconnect_receiver: "%requester% has disconnected and was not teleported to you."
+  request_error_disconnect_requester: "You cannot be teleported right now. %receiver% has disconnected."
+
+  request_cooldown: "You can send a TPA request in %seconds%s."
+
+  no_active_requests: "You don't have any pending TPA requests."
+  receiver_request_busy: "%receiver% already has an active TPA request!"
+  
+  receiver_not_online: "%receiver% is not online!"
+  requester_already_has_outgoing: "You already have an outgoing request! Cancel the previous request before sending a new one!" 
+
+  usage_help_player_arg: "Incorrect format! Usage: /%command% <Player>"
+  request_yourself: "You cannot TPA to yourself."
+  no_permission: "You can't run that command!'"
+
+  disconnected_player_name: "A Disconnected Player"
+  unknown_player_name: "A Unknown Player"
+  player_noun: "Player"
+
+# ---------------- CLICKABLE CHAT FEEDBACK MESSAGES ---------------- #
+
+clickables:
+  accept:
+    text: "[✔ Accept]"
+    hover: "Teleports %requester% to you!"
+    color: "GREEN"
+    command: "/tpaccept"
+    
+  deny:
+    text: "[✖ Deny]"
+    hover: "Denies %requester%'s TPA request."
+    color: "RED"
+    command: "/tpdeny"
+
+  cancel:
+    text: "[⬅ Cancel]"
+    hover: "Cancels your TPA request towards %receiver%."
+    command: "/tpcancel"
+    color: "GRAY"
+
+# ---------------------- COMMAND LOCALIZATION ---------------------- #
+
+tpa:
+  description: Sends a TPA request to the specified player.
+  usage: /tpa <player>
+
+tpaccept:
+  description: Accepts the currently active TPA request.
+  usage: /tpaccept
+
+tpdeny:
+  description: Denies the currently active TPA request.
+  usage: /tpdeny
+
+tpcancel:
+  description: Cancels your current TPA request.
+  usage: /tpcancel
