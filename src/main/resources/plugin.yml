@@ -1,0 +1,19 @@
+# Plugin Configuration
+name: TPAsk
+main: dev.matkeg.tpask.TPAsk
+version: "1.0"
+api-version: "1.21"
+author: github.com/matkeg
+
+# Commands also have translations!
+# Check out src/main/resources/languages
+commands:
+  tpa:
+    aliases: [tpask]
+  tpaccept:
+    aliases: [tpacc, tpyes]
+  tpdeny:
+    aliases: [tpdecline, tpno]
+  tpcancel:
+    aliases: [tpcan]
+

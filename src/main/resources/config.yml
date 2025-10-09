@@ -1,0 +1,66 @@
+# The main configuration file which controls how certain aspects of the plugin work.
+
+# ------------------ BASIC PLUGIN SETTINGS ------------------ #
+
+# Not case-sensitive, but keep in mind that language 
+# pack files MUST be named in all lowercase character!
+language: en_US
+
+# Update this if you choose to add new language packs;
+#
+# Keep in mind that the en_US language pack cannot be removed
+# and will always keep re-adding itself in the plugin/languages 
+# folder, as it is the default and fallback language pack the plugin uses.
+available_language_packs: 
+ - en_US
+ - sr_RS
+ 
+# ----------------- BASIC TELEPORT SETTINGS ----------------- #
+
+tpa:
+  cooldown: 80
+  timeout: 30
+  delay: 1
+  
+  freeze: true
+  must_stand_still: true
+
+# The hunger penalty applied on teleport.
+# Could be a nice way of discouraging the constant use of TPA.
+hunger_penalty:
+    enabled: true
+    
+    # Can either be "DISTANCE" or "FIXED".
+    type: "DISTANCE"
+    
+    # The amount the saturation is divided by when teleported.
+    saturation_divide_on_tp: 4.0
+    
+    # Number of blocks needed to teleport to lose ONE hunger point.
+    blocks_per_point_lost: 32
+    
+    # The amount of hunger points lost when using penalty type "FIXED" (0 - 20).
+    points_lost_fixed: 4
+    
+    # Makes sure that the player remains with at least one point (half a drumstick)
+    prevent_starving: true
+    
+# ----------------- AUDIO FEEDBACK SETTINGS ----------------- #
+
+sounds: 
+  enabled: true
+  
+  # The internal names of the sounds to be played;
+  keys: 
+    sent: "UI.TOAST.IN"
+    timedout: "UI.TOAST.OUT"
+    recieved: "ENTITY.ENDER_EYE.DEATH"
+    
+    canceled: "UI.TOAST.OUT"
+    accepted: "EVENT.MOB_EFFECT.BAD_OMEN"
+    denied: "BLOCK.AMETHYST_BLOCK.RESONATE"
+  
+  # Sounds set to true here will be played globally around the subject's.
+  played_globally: 
+    accepted : true
+

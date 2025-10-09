@@ -1,0 +1,38 @@
+# Colors of each message found in language packs can be changed here.
+# Learn more at https://minecraft.fandom.com/wiki/Formatting_codes
+
+# --------------- CHAT MESSAGE COLOR SETTINGS ---------------- 
+
+messages:
+  request_sent: "§8"
+  request_received: "§e"
+  
+  request_expired_receiver: "§8"
+  request_expired_requester: "§8"
+  
+  request_accepted_receiver: "§a"
+  request_accepted_requester: "§a"
+  
+  request_denied_receiver: "§4"
+  request_denied_requester: "§4"
+  
+  request_canceled_receiver: "§8"
+  request_canceled_requester: "§8"
+  
+  request_error_moved_receiver: "§4"
+  request_error_moved_requester: "§4"
+  
+  request_error_general_receiver: "§4"
+  request_error__general_requester:: "§4"
+  
+  request_cooldown: "§e"
+  
+  no_active_requests: "§4"
+  receiver_request_busy: "§4"
+  
+  receiver_not_online: "§c"
+  requester_already_has_outgoing: "§4"
+  
+  usage_help_player_arg: "§f"
+  request_yourself: "§4"
+  no_permission: "§4"
