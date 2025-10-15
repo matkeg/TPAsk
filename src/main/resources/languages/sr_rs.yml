@@ -1,81 +1,120 @@
+# Translation strings representing the Serbian (RS, Latin) language.
+#
 # --------------------- CHAT FEEDBACK MESSAGES --------------------- #
 
 messages:
-  request_sent: "TPA zahtev igraču %receiver% je poslat."
-  request_received: "%requester% ti je poslao/la TPA zahtev!"
-
-  request_expired_receiver: "TPA zahtev od igrača %requester% je istekao."
-  request_expired_requester: "Tvoj TPA zahtev upućen igraču %receiver% je istekao."
-
-  request_accepted_receiver: "Prihvatio si TPA zahtev od igrača %requester%."
-  request_accepted_requester: "Teleportuješ se do igrača %receiver%!"
-
-  request_denied_receiver: "Odbio si TPA zahtev od igrača %requester%."
-  request_denied_requester: "Tvoj TPA zahtev upućen igraču %receiver% je odbijen!"
-
-  request_canceled_receiver: "%requester% je otkazao/la svoj TPA zahtev."
-  request_canceled_requester: "Otkazao si svoj TPA zahtev upućen igraču %receiver%."
-
-  request_error_moved_receiver: "%requester% nije uspeo da se teleportuje do tebe jer se pomerio tokom teleportacije."
-  request_error_moved_requester: "Nisi teleportovan jer si se pomerio tokom teleportacije!"
-
-  request_error_general_receiver: "Nije moguće teleportovati igrača do tebe. Pokušaj ponovo kasnije."
-  request_error_general_requester: "Nije moguće da se teleportuješ sada. Pokušaj ponovo kasnije."
-
-  request_error_disconnect_receiver: "%requester% je izašao/la sa servera i nije teleportovan/a do tebe."
-  request_error_disconnect_requester: "Nije moguće da se teleportuješ sada. %receiver% je izašao/la sa servera."
-
-  request_cooldown: "Možeš poslati novi TPA zahtev za %seconds%s."
+  # BASE
   
-  no_active_requests: "Nemaš nijedan aktivan TPA zahtev."
-  receiver_request_busy: "%receiver% već ima aktivan TPA zahtev!"
+  sent: "TPA zahtev igraču %OTHER% je poslat."
+  here_sent: "TPA Here zahtev igraču %OTHER% je poslat."
   
-  receiver_not_online: "Igrač %receiver% nije na serveru!"
-  requester_already_has_outgoing: "Već imaš aktivan TPA zahtev! Otkaži stari zahtev pre nego što pošalješ novi!" 
+  received: "%OTHER% želi da se teleportuje do tebe!"
+  here_received: "%OTHER% želi da se ti teleportuješ do njih!"
 
-  usage_help_player_arg: "Pogrešan format! Upotreba: /%command% <Igrač>"
-  request_yourself: "Ne možeš da pošaljes samom sebi TPA zahtev!"
+  # STATES  
+
+  expired: "TPA zahtev od igrača %OTHER% je istekao."
+  expired_self: "Tvoj TPA zahtev prema igraču %OTHER% je istekao."
+
+  accepted: "Prihvatio/la si TPA zahtev od igrača %OTHER%."
+  accepted_self: "Teleportuješ se do igrača %OTHER%!"
+
+  denied: "TPA zahtev od igrača %OTHER% je odbijen."
+  denied_self: "Tvoj TPA zahtev prema igraču %OTHER% je odbijen!"
+
+  canceled: "%OTHER% je otkazao/la svoj TPA zahtev."
+  canceled_self: "Otkazao/la si svoj TPA zahtev prema %OTHER%."
+
+  # ERRORS
+
+  error_moved: "%OTHER% se pomerio/la tokom teleportacije i nije teleportovan/a do tebe."
+  error_moved_self: "Nisi teleportovan/a jer si se previše pomerao/la!"
+
+  error_general: "Trenutno nije moguće teleportovati se do tebe. Pokušaj ponovo kasnije."
+  error_general_self: "Trenutno nije moguće da se teleportuješ. Pokušaj ponovo kasnije."  
+
+  error_disconnect: "%OTHER% je izašao/la sa servera i nije teleportovan/a do tebe."
+  error_disconnect_self: "Ne možeš biti teleportovan/a jer je %OTHER% izašao/la sa servera." 
+
+  error_cross_world_disabled: "%OTHER% ne može biti teleportovan/a jer je teleportacija iz druge dimezije onemogućena!"
+  error_cross_world_disabled_self: "Teleportacija iz jedne u drugu dimeziju je onemogućena!"
+
+  # BUSY
+
+  self_outgoing_busy: "Već imaš aktivan TPA zahtev!" 
+  self_incoming_busy: "Imaš zahtev od nekoga! Prvo odgovori na njega pa pokušaj ponovo."
+  
+  other_is_busy: "%OTHER% već ima aktivan TPA zahtev!"  
+
+  # LOCATION
+  
+  back_to_previous_location: "Teleportuješ se nazad."
+  no_previous_location: "Nema lokacije u poslednjih %SECONDS%s na koju bi mogao/la da se vratiš."  
+
+  # INPUT ERRORS
+
+  not_online: "%OTHER% nije na serveru!"  
+  one_not_online: "Nisu svi navedeni igrači na serveru!" 
+  
+  request_yourself: "Ne možeš poslati TPA zahtev sebi!"
+  request_for_somebody_else: "Ne možeš poslati TPA zahtev za nekog drugog!"
+  
+  cmd_disabled: "/%COMMAND% je onemogućen na ovom serveru!"
   no_permission: "Nemaš dozvolu da koristiš ovu komandu!"
-
-  disconnected_player_name: "Igrač koji je napustio server"
-  unknown_player_name: "Nepoznat igrač"
+  disabled_cmd_bypassed: "Tvoja ovlašćenja su zaobišla ograničenja na /%COMMAND% komandi."
+  
+  cooldown: "Možeš poslati novi TPA zahtev za %SECONDS%s." 
+  no_active: "Nemaš nijedan aktivan TPA zahtev!"    
+  usage_help_player_arg: "Pogrešan format! Koristi: /%COMMAND% <player>"
+  
+  # NAME FALLBACKS
+  
   player_noun: "Igrač"
+  player_unknown: "Nepoznat" 
 
 # ---------------- CLICKABLE CHAT FEEDBACK MESSAGES ---------------- #
 
 clickables:
   accept:
     text: "[✔ Prihvati]"
-    hover: "Teleportuje igrača %requester% do tebe!"
-    command: "/tpaccept"
+    hover: "Prihvata zahtev od igrača %OTHER%!"
     color: "GREEN"
+    command: "/tpaccept"
     
   deny:
     text: "[✖ Odbij]"
-    hover: "Odbija TPA zahtev od igrača %requester%"
-    command: "/tpdeny"
+    hover: "Odbija zahtev od igrača %OTHER%."
     color: "RED"
+    command: "/tpdeny"
 
   cancel:
     text: "[⬅ Otkaži]"
-    hover: "Otkazuje tvoj TPA zahtev upućen igraču %receiver%"
+    hover: "Otkazuje tvoj zahtev prema igraču %OTHER%."
     command: "/tpcancel"
     color: "GRAY"
 
 # ---------------------- COMMAND LOCALIZATION ---------------------- #
 
 tpa:
-  description: Šalje TPA zahtev datom igraču.
-  usage: /tpa <igrač>
+  description: "Šalje TPA zahtev navedenom igraču."
+  usage: /tpa <player>
 
+tpahere:
+  description: "Šalje zahtev drugom igraču da se teleportuje do tvoje lokacije."
+  usage: /tpahere <player>
+   
 tpaccept:
-  description: Prihvata trenutni TPA zahtev.
+  description: "Prihvata trenutno aktivan TPA zahtev."
   usage: /tpaccept
 
 tpdeny:
-  description: Odbija trenutni TPA zahtev.
+  description: "Odbija trenutno aktivan TPA zahtev."
   usage: /tpdeny
-  
+
 tpcancel:
-  description: Otkazuje tvoj trenutni TPA zahtev.
+  description: "Otkazuje tvoj trenutni TPA zahtev."
   usage: /tpcancel
+  
+back:
+  description: "Teleportuje te nazad na prethodnu lokaciju."
+  usage: /back

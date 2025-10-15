@@ -1,25 +1,23 @@
-package dev.matkeg.tpask.Utils;
+package dev.matkeg.tpask.utilities;
 
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 
-import dev.matkeg.tpask.TPAsk;
+import dev.matkeg.tpask.PluginMain;
 
-/* --------------------------- MAIN --------------------------- */
+/* ---------------------- MAIN CLASS ---------------------- */
 public final class ColorUtils {
     // Modules
-    private final TPAsk plugin;
+    private final PluginMain plugin;
 
-    // Class Constructor
-    public ColorUtils(TPAsk plugin) {
-        this.plugin = plugin;
-    }
+    // Constructor
+    public ColorUtils(PluginMain plugin) { this.plugin = plugin; }
     
     /* ----------------------- APIs ----------------------- */
 
     /**
      * Parses a color name or hex string into a TextColor.
-     * Supports both NamedTextColor (like "RED") and hex codes (like "#ff0000").
+     * Supports both NamedTextColors (like "RED") and hex codes (like "#ff0000").
      *
      * @param colorString The color name or hex string
      * @return The parsed TextColor, or null if invalid
@@ -27,11 +25,11 @@ public final class ColorUtils {
     public TextColor parseColor(String colorString) {
         if (colorString == null || colorString.isEmpty()) return null;
 
-        // Try named color (case-insensitive)
+        // Try named color
         NamedTextColor named = NamedTextColor.NAMES.value(colorString.toLowerCase());
         if (named != null) return named;
 
-        // Try hex color (#RRGGBB)
+        // Try hex color
         if (colorString.startsWith("#")) {
             return TextColor.fromHexString(colorString);
         }

@@ -1,81 +1,127 @@
+# Translation strings representing the English (US) language.
+# 
+# You can freely modify this file. Any changes you make
+# will take effect the next time the server restarts.
+#
+# DON'T delete this file, as it servers as the default and
+# fallback language for the plugin. Any attempts to delete it
+# will result in the file being restored when the server restarts.
+#
 # --------------------- CHAT FEEDBACK MESSAGES --------------------- #
 
 messages:
-  request_sent: "Sent a TPA request to %receiver%."
-  request_received: "%requester% sent you a TPA request!"
-
-  request_expired_receiver: "%requester%'s TPA request has expired."
-  request_expired_requester: "Your TPA request towards %receiver% has expired."
-
-  request_accepted_receiver: "You've accepted %requester%'s TPA request."
-  request_accepted_requester: "Teleporting you to %receiver%!"
-
-  request_denied_receiver: "You've denied %requester%'s TPA request."
-  request_denied_requester: "Your TPA request towards %receiver% has been denied!"
-
-  request_canceled_receiver: "%requester% canceled their TPA request."
-  request_canceled_requester: "You've canceled your TPA request towards %receiver%."
-
-  request_error_moved_receiver: "%requester% moved while teleporting and was not teleported to you."
-  request_error_moved_requester: "You were not teleported because you moved while teleporting!"
-
-  request_error_general_receiver: "You cannot be teleported to right now. Try again later."
-  request_error_general_requester: "You cannot be teleported at the moment. Try again later."
-
-  request_error_disconnect_receiver: "%requester% has disconnected and was not teleported to you."
-  request_error_disconnect_requester: "You cannot be teleported right now. %receiver% has disconnected."
-
-  request_cooldown: "You can send a TPA request in %seconds%s."
-
-  no_active_requests: "You don't have any pending TPA requests."
-  receiver_request_busy: "%receiver% already has an active TPA request!"
+  # BASE
   
-  receiver_not_online: "%receiver% is not online!"
-  requester_already_has_outgoing: "You already have an outgoing request! Cancel the previous request before sending a new one!" 
+  sent: "Sent a TPA request to %OTHER%."
+  here_sent: "Sent a TPA Here request to %OTHER%."
+  
+  received: "%OTHER% wants to teleport to you!"
+  here_received: "%OTHER% wants you to teleport to them!"
 
-  usage_help_player_arg: "Incorrect format! Usage: /%command% <Player>"
+  # STATES  
+
+  expired: "%OTHER%'s TPA request has expired."
+  expired_self: "Your TPA request towards %OTHER% has expired."
+
+  accepted: "You've accepted %OTHER%'s TPA request."
+  accepted_self: "Teleporting you to %OTHER%!"
+
+  denied: "You've denied %OTHER%'s TPA request."
+  denied_self: "Your TPA request towards %OTHER% has been denied!"
+
+  canceled: "%OTHER% canceled their TPA request."
+  canceled_self: "You've canceled your TPA request towards %OTHER%."
+
+  # ERRORS
+
+  error_moved: "%OTHER% moved while teleporting and was not teleported to you."
+  error_moved_self: "You were not teleported because you moved too much!"
+
+  error_general: "You cannot be teleported to right now. Try again later."
+  error_general_self: "You cannot be teleported at the moment. Try again later."  
+
+  error_disconnect: "%OTHER% has disconnected and was not teleported to you."
+  error_disconnect_self: "You cannot be teleported right now. %OTHER% has disconnected." 
+
+  error_cross_world_disabled: "%OTHER% cannot be teleported because cross-world teleportation is disabled!"
+  error_cross_world_disabled_self: "You cannot be teleported because cross-world teleportation is disabled!"
+
+  # BUSY
+
+  self_outgoing_busy: "You already have an outgoing request!" 
+  self_incoming_busy: "You have an incoming request! Respond to it first!"
+  
+  other_is_busy: "%OTHER% already has an active TPA request!"  
+
+  # LOCATION
+  
+  back_to_previous_location: "Teleporting you back."
+  no_previous_location: "No location from the past %SECONDS%s to return to."  
+
+  # INPUT ERRORS
+
+  not_online: "%OTHER% is not online!"  
+  one_not_online: "Not every specified player is online!" 
+  
   request_yourself: "You cannot TPA to yourself."
-  no_permission: "You can't run that command!'"
-
-  disconnected_player_name: "A Disconnected Player"
-  unknown_player_name: "A Unknown Player"
+  request_for_somebody_else: "You cannot send a TPA request for somebody else!"
+  
+  cmd_disabled: "/%COMMAND% is disabled on this server!"
+  no_permission: "You don't have permission to run this command!"
+  disabled_cmd_bypassed: "Your permission levels bypassed /%COMMAND% command restrictions."
+  
+  cooldown: "You can send a TPA request in %SECONDS%s." 
+  no_active: "You don't have any pending TPA requests."    
+  usage_help_player_arg: "Invalid format! Use: /%COMMAND% <player>"
+  
+  # NAME FALLBACKS
+  
   player_noun: "Player"
+  player_unknown: "Unknown" 
 
 # ---------------- CLICKABLE CHAT FEEDBACK MESSAGES ---------------- #
 
 clickables:
   accept:
     text: "[✔ Accept]"
-    hover: "Teleports %requester% to you!"
+    hover: "Accepts %OTHER% request!"
     color: "GREEN"
     command: "/tpaccept"
     
   deny:
     text: "[✖ Deny]"
-    hover: "Denies %requester%'s TPA request."
+    hover: "Denies %OTHER%'s request."
     color: "RED"
     command: "/tpdeny"
 
   cancel:
     text: "[⬅ Cancel]"
-    hover: "Cancels your TPA request towards %receiver%."
+    hover: "Cancels your request towards %OTHER%."
     command: "/tpcancel"
     color: "GRAY"
 
 # ---------------------- COMMAND LOCALIZATION ---------------------- #
 
 tpa:
-  description: Sends a TPA request to the specified player.
+  description: "Sends a TPA request to the specified player."
   usage: /tpa <player>
 
+tpahere:
+  description: "Sends a teleport request to another player, asking them to teleport to your location."
+  usage: /tpahere <player>
+   
 tpaccept:
-  description: Accepts the currently active TPA request.
+  description: "Accepts the currently active TPA request."
   usage: /tpaccept
 
 tpdeny:
-  description: Denies the currently active TPA request.
+  description: "Denies the currently active TPA request."
   usage: /tpdeny
 
 tpcancel:
-  description: Cancels your current TPA request.
+  description: "Cancels your current TPA request."
   usage: /tpcancel
+  
+back:
+  description: "Teleports you back to your previous location."
+  usage: /back

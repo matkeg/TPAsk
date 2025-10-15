@@ -1,7 +1,7 @@
 # Plugin Configuration
 name: TPAsk
-main: dev.matkeg.tpask.TPAsk
-version: "1.0"
+main: dev.matkeg.tpask.PluginMain
+version: "1.1.0"
 api-version: "1.21"
 author: github.com/matkeg
 
@@ -10,10 +10,31 @@ author: github.com/matkeg
 commands:
   tpa:
     aliases: [tpask]
+    permission: tpask.use
+  tpahere:
+    aliases: [tph]
+    permission: tpask.use  
   tpaccept:
-    aliases: [tpacc, tpyes]
+    aliases: [tpyes]
+    permission: tpask.use
   tpdeny:
-    aliases: [tpdecline, tpno]
-  tpcancel:
+    aliases: [tpno]
+    permission: tpask.use
+  tpcancel:  
     aliases: [tpcan]
+    permission: tpask.use
+  back:
+    aliases: [return]
+    permission: tpask.use
+  tpa-reload:
+    aliases: [tpa-r]
+    permission: tpask.reload
 
+permissions:
+  tpask.use:
+    description: Allows the player to use the TPAsk plugin.
+    default: true
+    
+  tpask.reload:
+    description: Allows the player to reload TPAsk's configuration.
+    default: op

@@ -1,33 +1,33 @@
-package dev.matkeg.tpask.Managers;
+package dev.matkeg.tpask.managers;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.command.PluginCommand;
 
-import dev.matkeg.tpask.Utils.Output;
-import dev.matkeg.tpask.TPAsk;
+import dev.matkeg.tpask.utilities.OutputUtils;
+import dev.matkeg.tpask.utilities.ConfigUtils;
+import dev.matkeg.tpask.PluginMain;
 
 import java.util.List;
-import java.util.Map;
 import java.io.File;
 
-/* --------------------------- MAIN --------------------------- */
+/* ---------------------- MAIN CLASS ---------------------- */
 public class LanguageManager {
     // Modules
-    private final TPAsk plugin;
-    private final Output output;
+    private final PluginMain plugin;
+    private final OutputUtils output;
+    private final ConfigUtils conU;
     
-    // Private Variables
+    // Variables
     private FileConfiguration langFile;
     private FileConfiguration colorFile;
-    private FileConfiguration config;
     private String langSetting;
     
-    // Class Constructor
-    public LanguageManager(TPAsk plugin) {
+    // Constructor
+    public LanguageManager(PluginMain plugin) {
         this.plugin = plugin;
-        this.config = plugin.getConfig();
         this.output = plugin.getOutput();
+        this.conU = plugin.getConfigUtils();
     }
     
     /* --------------------- FUNCTIONS -------------------- */
@@ -37,7 +37,7 @@ public class LanguageManager {
         if (langFile != null) return;
         
         // Load language from config.yml
-        langSetting = config.getString("language", "en_us").toLowerCase();
+        langSetting = conU.getString("language", "en_us").toLowerCase();
         File langFilePath = new File(plugin.getDataFolder(), "languages/" + langSetting + ".yml");
 
         // If the lang file doesn't exist, fallback to en_US
@@ -69,7 +69,7 @@ public class LanguageManager {
             colorFile = YamlConfiguration.loadConfiguration(colorFilePath);
         } else {
             // Warn about missing file
-            output.warn("No color map file found.");
+            output.error("No color map file found.");
 
             // Use an empty yml config.
             colorFile = new YamlConfiguration();
@@ -77,6 +77,30 @@ public class LanguageManager {
     }
 
     /* ----------------------- APIs ----------------------- */
+    
+    /** 
+     * Gets the current language pack name. 
+     * @returns A string representing the
+     * currently loaded language pack.
+     */
+    public String getCurrentLanguageSetting() {
+        if (langSetting != null) {
+          return langSetting;  
+        } else {
+          return "un_kn"; 
+        }
+
+    }
+    
+    /** Clears the private variables. Used when the config reloads. */
+    public synchronized void reloadManager() {
+        this.langFile = null;
+        this.colorFile = null;
+        this.langSetting = null;
+        
+        this.loadLangFile();
+        this.loadColorsFile();
+    }
     
     /**
      * Saves the default language packs (and colors.yml) at 
@@ -93,14 +117,19 @@ public class LanguageManager {
         File englishFile = new File(plugin.getDataFolder(), "languages/en_us.yml");
         if (!englishFile.exists()) plugin.saveResource("languages/en_us.yml", false);
 
-        List<String> languages = config.getStringList("available_language_packs");
+        List<String> languages = conU.getStringList("available_language_packs");
         
         for (String lang : languages) {
-            String fileName = lang.toLowerCase() + ".yml";
-            File langFile = new File(plugin.getDataFolder(), "languages/" + fileName);
-
-            if (!langFile.exists()) {
-                plugin.saveResource("languages/" + fileName, false);
+            try {
+                String fileName = lang.toLowerCase() + ".yml";
+                File langFile = new File(plugin.getDataFolder(), "languages/" + fileName);
+                
+                if (!langFile.exists()) {
+                    plugin.saveResource("languages/" + fileName, false);
+                }
+            } catch (IllegalArgumentException e) {
+                output.error("Language pack", lang.toLowerCase(),
+                      "does not exist in the languages folder.");
             }
         }
     }
@@ -110,8 +139,9 @@ public class LanguageManager {
      * based on the currently specified language in config.yml
     */
     public void localizeCommands() {
-        for (PluginCommand cmd : plugin.getDescription().getCommands().keySet().stream()
-                .map(plugin::getCommand).toList()) {
+        for (PluginCommand cmd : plugin.getDescription().getCommands().keySet()
+                .stream().map(plugin::getCommand).toList()) {
+            // ----------------------------------------------
             if (cmd == null) continue;
 
             String desc = this.getLocalizedString(cmd.getName() + ".description", "");
@@ -127,7 +157,7 @@ public class LanguageManager {
 
     /**
      * Safely retrieves a localized string from the loaded language file.
-     * @param key The path in the language YAML
+     * @param key The path in the language YML
      * @param def Default value to return if missing
      * @return Localized string or fallback
      * 
@@ -143,17 +173,48 @@ public class LanguageManager {
     }
     
     /**
-     * Safely retrieves a color code string from the loaded colors file.
-     * @param key The path in the language YAML
-     * @return A string with the color code or §r
+     * Safely retrieves a localized message string from the loaded language file.
+     * Use <b>getLocalizedString()</b> for strings outside of the message scope.
      * 
-     * @see src/main/resources/languages/colors.yml
+     * @param key The path in the language YML
+     * @param def Default value to return if missing
+     * @return Localized string or fallback
+     * 
      */
-    public String getColorForString(String key) {
+    public String getUserMessage(String key, String def) {
+        // Get the lang file;
+        this.loadLangFile();
+
+        // Return the localized string, fallback to def if missing
+        return langFile.getString("messages." + key, def != null ? def :
+            "messages." + key.toUpperCase()+"::MISSING_LANG_MSG_ENTRY");
+    }
+    
+    /**
+     * Safely retrieves a color code string from the loaded colors file.
+     * @param path The path in the language YAML
+     * 
+     * @return A string with the color code or §r
+     */
+    public String getColorForString(String path) {
         // Get the colors file;
         this.loadColorsFile();
         
         // Return the color code string, or "§r" to reset.
-        return colorFile.getString(key, "§r");
+        return colorFile.getString(path, "§r");
+    }
+    
+    /**
+     * Safely retrieves a color code string from the loaded colors file.
+     * @param key The key, in the "messages" element, in the language YAML
+     * 
+     * @return A string with the color code or §r
+     */
+    public String getColorForMessage(String key) {
+        // Get the colors file;
+        this.loadColorsFile();
+        
+        // Return the color code string, or "§r" to reset.
+        return colorFile.getString("messages." + key, "§r");
     }
 }

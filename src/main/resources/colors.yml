@@ -1,38 +1,75 @@
 # Colors of each message found in language packs can be changed here.
-# Learn more at https://minecraft.fandom.com/wiki/Formatting_codes
-
+#
+# NOTE: Any message entries which don't have their own entry in
+# this file will have the base color applied to them.
+#
+# Learn more about minecraft's color codes at the link below:
+# https://minecraft.fandom.com/wiki/Formatting_codes
+#
 # --------------- CHAT MESSAGE COLOR SETTINGS ---------------- 
 
 messages:
-  request_sent: "§8"
-  request_received: "§e"
+  # BASE
   
-  request_expired_receiver: "§8"
-  request_expired_requester: "§8"
+  sent: §7
+  here_sent: §7
   
-  request_accepted_receiver: "§a"
-  request_accepted_requester: "§a"
+  received: §e
+  here_received: §e
+
+  # STATES  
+
+  expired: §7
+  expired_self: §7
+
+  accepted: §a
+  accepted_self: §a
+
+  denied: §c
+  denied_self: §c
+
+  canceled: §7
+  canceled_self: §7
+
+  # ERRORS
+
+  error_moved: §7
+  error_moved_self: §c
+
+  error_general: §c
+  error_general_self: §c
+
+  error_disconnect: §7
+  error_disconnect_self: §c
   
-  request_denied_receiver: "§4"
-  request_denied_requester: "§4"
+  error_cross_world_disabled: §c
+  error_cross_world_disabled_self: §c
+    
+  # BUSY
+
+  self_outgoing_busy: §c 
+  self_incoming_busy: §c
   
-  request_canceled_receiver: "§8"
-  request_canceled_requester: "§8"
+  other_is_busy: §c
+
+  # LOCATION
   
-  request_error_moved_receiver: "§4"
-  request_error_moved_requester: "§4"
+  back_to_previous_location: §a
+  no_previous_location: §c 
+
+  # INPUT ERRORS
+
+  not_online: §c
+  one_not_online: §c
   
-  request_error_general_receiver: "§4"
-  request_error__general_requester:: "§4"
+  request_yourself: §c
+  request_for_somebody_else: §c
   
-  request_cooldown: "§e"
+  cmd_disabled: §c
+  no_permission: §c
+  disabled_cmd_bypassed: §e
   
-  no_active_requests: "§4"
-  receiver_request_busy: "§4"
+  cooldown: §e
+  no_active: §c
+  usage_help_player_arg: §f
   
-  receiver_not_online: "§c"
-  requester_already_has_outgoing: "§4"
-  
-  usage_help_player_arg: "§f"
-  request_yourself: "§4"
-  no_permission: "§4"

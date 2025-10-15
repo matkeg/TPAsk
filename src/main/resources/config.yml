@@ -1,66 +1,173 @@
 # The main configuration file which controls how certain aspects of the plugin work.
 
-# ------------------ BASIC PLUGIN SETTINGS ------------------ #
+# ---------------- BASIC PLUGIN SETTINGS ---------------- #
 
-# Not case-sensitive, but keep in mind that language 
-# pack files MUST be named in all lowercase character!
+# Language pack names are not case-sensitive here, but keep
+# in mind that language pack filenames MUST be lowercase.
 language: en_US
 
-# Update this if you choose to add new language packs;
+
+# Update this if you choose to add or remove language packs;
 #
-# Keep in mind that the en_US language pack cannot be removed
-# and will always keep re-adding itself in the plugin/languages 
-# folder, as it is the default and fallback language pack the plugin uses.
+# Keep in mind that the en_US language pack cannot be 
+# removed and will always keep re-adding itself in the
+# plugin/languages folder, as it is the default and 
+# fallback language pack the plugin uses.
 available_language_packs: 
  - en_US
  - sr_RS
  
-# ----------------- BASIC TELEPORT SETTINGS ----------------- #
+# --------------- BASIC TELEPORT SETTINGS---------------- #
 
 tpa:
+  # (30 - 120)
   cooldown: 80
+  # (10 - 60)
   timeout: 30
+  # (0 - 5)
   delay: 1
   
+  # Should the TPA prevent the player from moving 
+  # while awaiting the teleportation.
+  #
+  # NOTE: Even if this is set to true, external forces
+  # such as knockback can still move the player.
   freeze: true
+  
+  # Should the teleport get canceled if the player
+  # moves while awaiting the teleportation.
   must_stand_still: true
+  
+  # Maximum distance (in blocks) a player can move
+  # while awaiting teleportation. Only applies if
+  # must_stand_still is set to true.
+  movement_leeway: 1.0
 
-# The hunger penalty applied on teleport.
-# Could be a nice way of discouraging the constant use of TPA.
-hunger_penalty:
-    enabled: true
-    
-    # Can either be "DISTANCE" or "FIXED".
-    type: "DISTANCE"
-    
-    # The amount the saturation is divided by when teleported.
-    saturation_divide_on_tp: 4.0
-    
-    # Number of blocks needed to teleport to lose ONE hunger point.
-    blocks_per_point_lost: 32
-    
-    # The amount of hunger points lost when using penalty type "FIXED" (0 - 20).
-    points_lost_fixed: 4
-    
-    # Makes sure that the player remains with at least one point (half a drumstick)
-    prevent_starving: true
-    
-# ----------------- AUDIO FEEDBACK SETTINGS ----------------- #
 
-sounds: 
+world:
+  # Whether players can teleport between worlds.
+  # (worlds AKA. dimensions - eg. overworld to nether)
+  cross_teleportation: true
+
+# ----------------- ADDITIONAL FEATURES ----------------- #
+
+action_bar:
+  # Whether certain plugin messages are shown in the 
+  # action bar (above the hotbar) instead of the chat,
+  # in order to reduce chat clutter caused by the plugin. 
   enabled: true
   
-  # The internal names of the sounds to be played;
+  # The approximate duration of the action bar in seconds.
+  # This value cannot guarantee the exact duration as Minecraft
+  # does not natively support custom action bar durations.
+  duration: 5
+
+
+back:
+  # Whether the back command is enabled.
+  enabled: true
+  
+  # How long (in seconds) the previous location is remembered.
+  # After this, /back cannot be used to return the player back.
+  available_for: 60  
+  
+  # Whether the values in the tpa entry
+  # should be used instead of these ones.
+  use_tpa_values: true
+  
+  # Same as values in the tpa entry. Check
+  # out tpa's counterparts for more info.
+  delay: 1
+  freeze: true
+  must_stand_still: true
+  movement_leeway: 1.0
+
+
+tpahere:
+  # Whether the tpahere command is enabled.
+  enabled: true
+  
+  # Should the /tpa command also support the /tpahere
+  # functionality using /tpa <player> <me>.
+  tpa_context_recognition: true
+
+# --------------- AUDIO FEEDBACK SETTINGS --------------- #
+
+sounds:
+  # Whether the sound effects are played 
+  # when interacting with the plugin.
+  enabled: true
+  
+  # Check out https://minecraftsounds.com/ for a list of
+  # all available minecraft sounds and their internal names.
   keys: 
     sent: "UI.TOAST.IN"
     timedout: "UI.TOAST.OUT"
-    recieved: "ENTITY.ENDER_EYE.DEATH"
+    received: "ENTITY.ENDER_EYE.DEATH"
     
     canceled: "UI.TOAST.OUT"
     accepted: "EVENT.MOB_EFFECT.BAD_OMEN"
     denied: "BLOCK.AMETHYST_BLOCK.RESONATE"
   
-  # Sounds set to true here will be played globally around the subject's.
+    penalized: "BLOCK.BEACON.DEACTIVATE"
+    error: "BLOCK.AMETHYST_BLOCK.RESONATE"
+  
+  # Volume of individual sounds (0.0 - 1.0).
+  # Unlisted sounds default to 1.0.
+  volume:
+    penalized: 0.4
+  
+  # Sounds set to true here will be played 
+  # globally around the subject player.
   played_globally: 
-    accepted : true
+    accepted: true
 
+# ---------------- ADVANCED TELEPORT SETTINGS --------------- #
+
+hunger_penalty:
+    # Whether the hunger penalty is applied when teleporting.
+    enabled: true
+    
+    # Whether a sound should play when the player is penalized.
+    penalized_sound: false
+    
+    # Can either be "FIXED" or "DISTANCE".
+    # "FIXED": Always lose a fixed amount of food points.
+    # "DISTANCE": Longer TP distance = more food points lost.
+    type: "DISTANCE"
+
+    # Whether the hunger penalty also gets applied when the
+    # player returns to their previous location. (/back)
+    applied_on_return: true
+    
+    # The amount the saturation is divided by when teleported.
+    saturation_divide_on_tp: 4.0
+    # Number of blocks needed to teleport to lose ONE food point.
+    blocks_per_point_lost: 32
+    # The amount of food points lost when using penalty type "FIXED" (0 - 20).
+    points_lost_fixed: 4
+    # Makes sure that the player remains with at least one food point (half a drumstick)
+    prevent_starving: true
+
+# -------------------- ADVANCED SETTINGS -------------------- #
+
+# Allows you to control which additional debug messages are
+# printed out to the server's console - some which might be
+# useful to server operators and developers.
+#
+# Keep in mind that this setting does not disable important
+# plugin outputs such as those when certain plugin files 
+# are missing or when a error occurs within the plugin.
+debug:
+  requests: false
+  teleport: false
+  invalid_permissions: false
+
+
+# DO NOT CHANGE THIS!!!
+# Indicates the plugin versions which this
+# configuration file is compatible with.
+version_compatibility:
+  maximum: 1.1.0
+  minimum: 1.1.0
+  
